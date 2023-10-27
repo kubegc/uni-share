@@ -46,11 +46,11 @@ else (NOT ${USE_ORIGINAL})
     target_link_libraries(cuda-control ${STATIC_C_LIBRARIES})
 
     # process monitor
-    #add_executable(nvml-monitor
-    #        tools/monitor_dockernized.c
-    #        src/loader.c
-    #        src/register.c)
-    #target_link_libraries(nvml-monitor ${STATIC_C_LIBRARIES} -ldl -lpthread)
+    add_executable(nvml-monitor
+            tools/monitor_dockernized.c
+            src/loader.c
+            src/register.c)
+    target_link_libraries(nvml-monitor ${STATIC_C_LIBRARIES} -ldl -lpthread)
 endif ()
 
 target_compile_options(cuda-control PUBLIC $<$<COMPILE_LANGUAGE:CXX>:-std=c++11>)
