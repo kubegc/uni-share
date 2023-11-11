@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+        name: testpod
+spec:
+        restartPolicy: Never
+        nodeName: 133.133.135.73
+        containers:
+                - name: testgpucon
+                  image: docker.io/pytorch/pytorch:2.0.1-cuda11.7-cudnn8-devel
+                  imagePullPolicy: Never
+                  securityContext:
+                          privileged: true
+                  command: ["sleep"]
+                  args: ["infinity"]
+                  resources:
+                          requests:
+                                  tencent.com/vcuda-core: 90
+                                  tencent.com/vcuda-memory: 50
+                          limits:
+                               tencent.com/vcuda-core: 90
+                               tencent.com/vcuda-memory: 50
+                  env:
+                    - name: LOGGER_LEVEL
+                      value: "5"
