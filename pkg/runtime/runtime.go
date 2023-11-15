@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -102,7 +103,13 @@ func (m *containerRuntimeManager) GetPidsInContainers(containerID string) ([]int
 	}
 
 	pids := make([]int, 0)
-	baseDir := filepath.Clean(filepath.Join(types.CGROUP_BASE, cgroupPath))
+	var cgroupBase = " "
+	if 1 == getCgroupVersion() {
+		cgroupBase = types.CGROUP_V2
+	} else {
+		cgroupBase = types.CGROUP_V1
+	}
+	baseDir := filepath.Clean(filepath.Join(types.cgroupBase, cgroupPath))
 	filepath.Walk(baseDir, func(path string, info os.FileInfo, err error) error {
 		if info == nil {
 			return nil
@@ -120,6 +127,27 @@ func (m *containerRuntimeManager) GetPidsInContainers(containerID string) ([]int
 	})
 
 	return pids, nil
+}
+
+func getCgroupVersion() int {
+	cmd := exec.Command("sh", "-c", "mount | grep cgroup")
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		klog.Errorf("can't exec shell %v", err)
+	}
+
+	// 将输出转换为字符串
+	outputStr := string(output)
+
+	// 进一步处理输出，可以将其拆分为行
+	lines := strings.Split(outputStr, "\n")
+	for _, line := range lines {
+		if strings.Contains(line, "/sys/fs/cgroup/memory") {
+			return 0
+		}
+	}
+
+	return 1
 }
 
 func readProcsFile(file string) ([]int, error) {

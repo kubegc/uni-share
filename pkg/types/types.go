@@ -56,7 +56,8 @@ const (
 )
 
 const (
-	CGROUP_BASE  = "/sys/fs/cgroup"
+	CGROUP_V2    = "/sys/fs/cgroup"
+	CGROUP_V1    = "/sys/fs/cgroup/memory"
 	CGROUP_PROCS = "cgroup.procs"
 )
 
