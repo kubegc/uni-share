@@ -1,5 +1,5 @@
 # stage 1
-FROM nvidia/cuda:11.5.1-devel-ubuntu18.04 as build
+FROM nvidia/cuda:11.5.2-devel-ubuntu20.04 as build
 
 
 RUN apt update && apt install -y --no-install-recommends \
@@ -51,5 +51,5 @@ FROM centos:7
 ARG version
 ARG commit
 
-COPY --from=rpmpkg  /root/rpmbuild/RPMS/x86_64/vcuda-${version}-${commit}.el7.x86_64.rpm /tmp
-RUN rpm -ivh /tmp/vcuda-${version}-${commit}.el7.x86_64.rpm && rm -rf /tmp/vcuda-${version}-${commit}.el7.x86_64.rpm
+COPY --from=rpmpkg  /root/rpmbuild/RPMS/*/vcuda-${version}-${commit}.el7.*.rpm /tmp
+RUN rpm -ivh /tmp/vcuda-${version}-${commit}.el7.*.rpm && rm -rf /tmp/vcuda-${version}-${commit}.el7.*.rpm
