@@ -6,6 +6,7 @@ set -o xtrace
 
 ROOT=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd -P)
 IMAGE_FILE=${IMAGE_FILE:-"fish/vcuda:latest"}
+FILEPATH=$PWD
 img="unishare/cudactl"
 version="1.0.0"
 repo="g-ubjg5602-docker.pkg.coding.net/iscas-system/containers"
@@ -32,7 +33,7 @@ function build_img() {
       #docker run --privileged --rm tonistiigi/binfmt --install all
       #docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       #docker build ${BUILD_FLAGS:-} --build-arg version=${version} --build-arg commit=${commit} -t ${IMAGE_FILE} .
-      docker buildx build /home/onceas/wyy/unishare/cuda-ctrl/build --platform linux/arm64,linux/amd64 ${BUILD_FLAGS:-} --build-arg version=${version} --build-arg commit=${commit} -t $repo/$img:v$version --push  -f /home/onceas/wyy/unishare/cuda-ctrl/build/Dockerfile
+      docker buildx build $FILEPATH --platform linux/arm64,linux/amd64 ${BUILD_FLAGS:-} --build-arg version=${version} --build-arg commit=${commit} -t $repo/$img:v$version --push  -f $FILEPATH/Dockerfile
       #docker buildx build --load --no-cache /home/onceas/wyy/gpudeploy/vcuda-controller/build    --platform linux/amd64 ${BUILD_FLAGS:-} --build-arg version=${version} --build-arg commit=${commit} -t ${IMAGE_FILE}-amd64  -f /home/onceas/wyy/gpudeploy/vcuda-controller/build/Dockerfile
 
     )
