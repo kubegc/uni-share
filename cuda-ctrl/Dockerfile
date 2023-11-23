@@ -7,7 +7,7 @@ RUN apt update && apt install -y --no-install-recommends \
 
 RUN curl -s -L https://nvidia.github.io/libnvidia-container/gpgkey | apt-key add -
 
-RUN apt install -y --no-install-recommends \
+DEBIAN_FRONTEND=noninteractive RUN apt install -y --no-install-recommends \
   cmake libvdpau-dev && \
   rm -rf /var/lib/apt/lists/*
 
