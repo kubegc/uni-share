@@ -26,7 +26,7 @@ cp scheduler-policy-config.json /etc/kubernetes
 - 备份kube-scheduler.yaml文件
 
 ``````
-cp /etc/kubernetes/kube-scheduler.yaml ./
+cp /etc/kubernetes/manifests/kube-scheduler.yaml ./
 ``````
 
 - command处增加
@@ -72,8 +72,8 @@ volumes:
 ### 3、
 
 ``````
-cd deploy
-chmod +x gpuDeploy.sh
-./gpuDeploy.sh
+//cd deploy
+//chmod +x gpuDeploy.sh
+//./gpuDeploy.sh
 ``````
 

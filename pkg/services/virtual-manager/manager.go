@@ -397,7 +397,7 @@ func (vm *VirtualManager) registerVDeviceWithContainerId(podUID, contID string) 
 	return &vcudaapi.VDeviceResponse{}, nil
 }
 
-// Deprecated
+
 func (vm *VirtualManager) registerVDeviceWithContainerName(podUID, contName string) (*vcudaapi.VDeviceResponse, error) {
 	klog.V(2).Infof("UID: %s, contName: %s want to registration", podUID, contName)
 
@@ -433,7 +433,8 @@ func (vm *VirtualManager) registerVDeviceWithContainerName(podUID, contName stri
 			}
 		}
 
-		containerID = strings.TrimPrefix(containerID, "docker://")
+		parts := strings.SplitN(containerID, "//", 2)
+		containerID = parts[1]
 
 		if len(containerID) == 0 {
 			klog.Errorf("can't locate %s(%s)", podUID, contName)

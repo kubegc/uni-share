@@ -1,20 +1,4 @@
-/*
- * Tencent is pleased to support the open source community by making TKEStack
- * available.
- *
- * Copyright (C) 2012-2019 Tencent. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- *
- * https://opensource.org/licenses/Apache-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OF ANY KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations under the License.
- */
+
 
 #include <errno.h>
 #include <fcntl.h>
@@ -552,7 +536,7 @@ static void register_to_remote() {
           NVML_DEVICE_PCI_BUS_ID_BUFFER_SIZE);
 
   register_to_remote_with_data(g_vcuda_config.bus_id, g_vcuda_config.pod_uid,
-                               g_vcuda_config.container_name);
+                               g_vcuda_config.container_name, "");
 }
 
 static void initialization() {

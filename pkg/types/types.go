@@ -22,13 +22,13 @@ import (
 )
 
 const (
-	VDeviceAnnotation       = "tencent.com/vcuda-device"
-	VCoreAnnotation         = "tencent.com/vcuda-core"
-	VCoreLimitAnnotation    = "tencent.com/vcuda-core-limit"
-	VMemoryAnnotation       = "tencent.com/vcuda-memory"
-	PredicateTimeAnnotation = "tencent.com/predicate-time"
-	PredicateGPUIndexPrefix = "tencent.com/predicate-gpu-idx-"
-	GPUAssigned             = "tencent.com/gpu-assigned"
+	VDeviceAnnotation       = "doslab.io/vcuda-device"
+	VCoreAnnotation         = "doslab.io/vcuda-core"
+	VCoreLimitAnnotation    = "doslab.io/vcuda-core-limit"
+	VMemoryAnnotation       = "doslab.io/vcuda-memory"
+	PredicateTimeAnnotation = "doslab.io/predicate-time"
+	PredicateGPUIndexPrefix = "doslab.io/predicate-gpu-idx-"
+	GPUAssigned             = "doslab.io/gpu-assigned"
 	ClusterNameAnnotation   = "clusterName"
 
 	VCUDA_MOUNTPOINT = "/etc/vcuda"
